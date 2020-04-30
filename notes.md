@@ -28,3 +28,19 @@ La bibliothèque de Babel est une nouvelle décrit une bibliothèque de taille g
 Les fichiers `.pcap` ou encore `.pcapng` sont des fichiers de WireShark. Pour enregistrer des fichiers capturés (images, fichier HTML, etc) : File > Export Objects > HTTP.
 
 [WireShark](https://www.wireshark.org/)
+
+## Utilisation de GDB (GNU Debugger)
+
+Ouvrez votre fichier binaire avec `gdb nomDuFichier`.
+
+Commandes :
+
+-   `set disassembly-flavor intel` : change la syntaxe de l'assembleur
+-   `disassemble [where]` : désassemble le code (ex : `disassemble main`)
+-   `break <code>` : ajoute un breakpoint (ex : `break *main` ; `break *main+200` ; `break \*0x373`)
+-   `info registers` : affiche le contenu des registres
+-   `si` : exécute l'instruction suivante
+-   `ni` : comme `si` exécute l'instruction suivante, mais en cas d'appel de fonction, exécute la fonction jusqu'à son appel de retour
+-   `set $<registre>=<valeur>`: définit une valeur a un registre (ex : set \$eax=0)
+
+Appuie sur ENTRÉE exécute automatiquement la dernière commande entrée.
