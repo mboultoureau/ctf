@@ -2,6 +2,29 @@
 
 Ce sont des notes aléatoires de mes différents CTF et challenges effectués.
 
+## Sommaire
+
+-   [Mathématiques](#mathématiques)
+    -   [Conversion de bases](#conversion-de-bases)
+-   [Cryptographie](#cryptographie)
+    -   [Brainfuck](#brainfuck)
+    -   [Bibliothèque de Babel](#bibliothèque-de-Babel)
+-   [Réseau](#réseau)
+    -   [Analyseur réseau : WireShark](#analyseur-réseau--wireshark)
+-   [Reverse Engineering](#reverse-engineering)
+    -   [Utilisation de GDB (GNU Debugger)](#utilisation-de-gdb-gnu-debugger)
+    -   [Commandes utiles](#commandes-utiles)
+
+## Mathématiques
+
+### Conversion de bases
+
+Avec un interpréteur Python :
+
+-   `bin(nb)` : convertit un nombre en binaire (ex : `bin(123)` = 0b1111011)
+-   `hex(nb)` : convertit un nombre en hexadecimal (ex : `hex(123)` = 0x7b)
+-   `int(nb, base)` : convertit un nombre de n'importe quelle en base en décimal (ex : `int('0x7b', 16)` = 123)
+
 ## Cryptographie
 
 ### Brainfuck
@@ -35,7 +58,7 @@ Les fichiers `.pcap` ou encore `.pcapng` sont des fichiers de WireShark. Pour en
 
 ## Reverse Engineering
 
-## Utilisation de GDB (GNU Debugger)
+### Utilisation de GDB (GNU Debugger)
 
 Ouvrez votre fichier binaire avec `gdb nomDuFichier`.
 
@@ -52,7 +75,7 @@ Commandes :
 
 Appuie sur ENTRÉE exécute automatiquement la dernière commande entrée.
 
-## Commandes utiles
+### Commandes utiles
 
 -   `file nomFichier` : affiche des informations sur le type du fichier
 -   `hexdump -C nomFichier` : affiche le contenu du fichier en hexadécimal
