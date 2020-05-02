@@ -1,0 +1,2 @@
+# Tarte Tatin
+En observant le code C dans Ghidra on s'aperçoit que la fonction `transform` incrémente la valeur ASCII de 1. Il suffit de prendre le flag_enc, l'incrémenter de 1 et le convertir en ASCII.
