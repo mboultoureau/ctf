@@ -14,6 +14,8 @@ Ce sont des notes aléatoires de mes différents CTF et challenges effectués.
 -   [Reverse Engineering](#reverse-engineering)
     -   [Utilisation de GDB (GNU Debugger)](#utilisation-de-gdb-gnu-debugger)
     -   [Commandes utiles](#commandes-utiles)
+-   [Outils](#outils)
+    -   [Docker](#docker)
 
 ## Mathématiques
 
@@ -83,3 +85,8 @@ Appuie sur ENTRÉE exécute automatiquement la dernière commande entrée.
 -   `objdump -d nomFichier` : affiche le code assembleur du programme
 -   `strace nomFichier` : affiche tous les appels systèmes (syscalls)
 -   `ltrace nomFichier` : affiche les appels des différentes librairies
+
+## Outils
+
+### Docker
+`docker run -v ~/Documents/ctf:/ctf -ti booyaabes/kali-linux-full`
