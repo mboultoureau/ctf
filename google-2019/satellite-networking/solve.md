@@ -16,4 +16,4 @@ Password: start-sniffing!
 
 Il faut probablement donc utilisé WireShark. Et en effet, en analysant on trouve le flag.
 
-CTF{4efcc72090af28fd33a2118985541f92e793477f}
+Flag : `CTF{4efcc72090af28fd33a2118985541f92e793477f}`
