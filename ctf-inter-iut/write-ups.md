@@ -44,3 +44,27 @@ Flag : `ENSIBS{w1r3sh4Rk_iS_c00l}`
 Le challenge porte sur une [image PNG](https://challs.hack2g2.fr/03/logo_v1.png). Malheureusement, impossible de la visualiser et la commande `file` nous indique que ce fichier n'est pas une image. Nous ouvrons donc l'image dans un éditeur hexadécimal et nous constatons que les huit premiers octets ont été remplacés : `DE AD BE EF CA FE BA BE`. Il nous suffit donc de les remplacer par le magic code des images PNG : `89 50 4E 47 0D 0A 1A 0A` et noter le flag présent sur l'image.
 
 Flag : `ENSIBS{m4g1c_nUmb3rz_t00_ez}`
+
+## AES Ciphertext
+
+```
+On peut chiffrer mille fois mille messages, euh non, une fois mille messages mais on ne peut pas chiffrer un message mille fois.
+Ou peut-être que si Visage songeur !
+La clé est '\xcaV7Zs\xbb\xe3\xec\xcd~\x8ad\xf5ZA\xb7' !
+Essayez de déchiffrer ce message : http://challs.hack2g2.fr/04/ciphertext.
+```
+
+Le fichier s'appelle ciphertext. Après quelques recherches sur Internet, on peut supposer qu'il s'agit de l'[algorithme de chiffrement AES](https://fr.wikipedia.org/wiki/Advanced_Encryption_Standard). (Cela fut confirmé après lorsque le fichier a été édité avec "AES ciphertext" au début). L'autre indice est qu'il fallait déchiffrer le message mille fois.
+
+Il faut désormais la clé. Pour cela on peut utiliser noter les valeurs ASCII des caractères qui ne sont encore en hexadécimale ou utiliser Python :
+
+```python
+import binascii
+binascii.hexlify(b'\xcaV7Zs\xbb\xe3\xec\xcd~\x8ad\xf5ZA\xb7')
+
+>>> ca56375a73bbe3eccd7e8a64f55a41b7
+```
+
+Avec tout cela, nous pouvons réaliser un script Python.
+
+Note : j'ai perdu beaucoup de temps car j'utilisais le mauvais [mode d'opération](https://fr.wikipedia.org/wiki/Mode_d%27op%C3%A9ration_(cryptographie)) (CBC au lieu d'ECB). J'ai remarqué mon erreur quand j'ai compris le mode CBC nécessité un vecteur d'initialisation donnée.
