@@ -2,6 +2,9 @@
 
 Les différents Write-Ups du [CTF Inter IUT](https://twitter.com/CTF_Inter_IUT).
 
+## Sommaire
+- [Bibliothèque de Babel](#bibliothèque-de-babel)
+
 
 ## Bibliothèque de Babel
 
@@ -68,3 +71,80 @@ binascii.hexlify(b'\xcaV7Zs\xbb\xe3\xec\xcd~\x8ad\xf5ZA\xb7')
 Avec tout cela, nous pouvons réaliser un script Python.
 
 Note : j'ai perdu beaucoup de temps car j'utilisais le mauvais [mode d'opération](https://fr.wikipedia.org/wiki/Mode_d%27op%C3%A9ration_(cryptographie)) (CBC au lieu d'ECB). J'ai remarqué mon erreur quand j'ai compris le mode CBC nécessité un vecteur d'initialisation donnée.
+
+## Offuscation JavaScript
+
+Le [site](https://challs.hack2g2.fr/05/index.html) présente une page de connexion avec une adresse email à compléter et un mot de passe. En inspectant le contenu HTML, on s'aperçoit d'une part que le formulaire n'est pas envoyé et d'autre part qu'il y a un fichier `obf.js`. Nous pouvons en déduire qu'il s'agit d'un challenge sur de l'offuscation (obfuscation en anglais).
+
+Il nous suffit de [mettre en forme](https://beautifier.io/) ce fichier et comment à regarder sa structure :
+```javascript
+function commentcava(proposal) {
+    let b64Proposal = btoa(proposal);
+    let result = "";
+    for (var i = 0; i < b64Proposal.length; i++) {
+        result += String.fromCharCode(b64Proposal.charCodeAt(i) + (i % 4));
+    }
+    return result;
+}
+
+function salutatous(msg) {
+    let result = "";
+    for (var i = 0; i < msg.length; i++) {
+        result += String.fromCharCode(msg.charCodeAt(i) ^ (Math.floor(Math.random() * Math.floor(42))));
+    }
+    const res_len = -((result.length * 2 / 3) + (Number.isInteger(result.length * 2 / 3) ? 0 : 1));
+    return result.slice(result.length / 3, res_len);
+}
+
+function checkCreds() {
+    let n = document.querySelectorAll("#👍")[0];
+    if ((salutatous(commentcava(leszouzous)) + commentcava(leszouzous.value) === superettoi.value) && ((1, 2, 3, 4, 5, 6) === (2, 4, 6))) {
+        alert("GG WP Tu peux valider le chall");
+    } else {
+        alert("Au gogol");
+    }
+}
+```
+
+Lors nous cliquons sur le bouton **Submit**, nous constatons que cela appelle la fonction `checkCreds()`. Commençons par là. La partie qui nous intéresse l'intérieur du `if`.
+
+```javascript
+function checkCreds() {
+    let n = document.querySelectorAll("#👍")[0]; // Valeur jamais utilisé
+    if (
+        (salutatous(commentcava(leszouzous)) + commentcava(leszouzous.value) === superettoi.value) &&
+        ((1, 2, 3, 4, 5, 6) === (2, 4, 6)) // True
+    ) {
+        alert("GG WP Tu peux valider le chall");
+    } else {
+        alert("Au gogol");
+    }
+}
+```
+
+Nous pouvons déjà retirer `((1, 2, 3, 4, 5, 6) === (2, 4, 6))` qui renvoit toujours `True`. Nous devons donc trouver un mot de passe (`leszouzous` étant l'identifiant du mot de passe) qui est égale à la valeur du `input` qui est caché avec l'identifiant `superettoi` (regarder sa valeur dans le HTML ou taper dans la console son identifiant).
+
+```python
+superettoi = "RV7WSVLWe1q4XzviYk[3X{3iQVXWXzO}bnP|eYC6MUDxfR?@"
+```
+
+Continuons en examinant la fonction `commentcava()` :
+```javascript
+function commentcava(proposal) {
+    let b64Proposal = btoa(proposal); // Encode proposal en base64
+    let result = "";
+    for (var i = 0; i < b64Proposal.length; i++) {
+        // Pour chaque lettre de b64proposal, prendre le code ASCII et ajouter i % 4
+        result += String.fromCharCode(b64Proposal.charCodeAt(i) + (i % 4));
+    }
+    return result;
+}
+```
+
+Nous pouvons déjà commencer par faire l'inverse de cette fonction en Python. On prend la valeur de superettoi, pour chaque valeur on prend son code ASCII auquel on soustrait `i % 4`, puis on décode la chaine finale en base64.
+
+Après l'écrire d'un code Python qui fait cela, on s'aperçoit que cette fonction nous donne directement le résultat.
+
+Flag : `ENSIBS{J5_+_b64_=_AES_#3ncryp710n}`
+
+Remarque : En observant le code de la fonction `salutatous()`, on s'en rend compte qu'elle renvoit une chaine vide. En effet, elle retourne une sous-chaine avec [`slice`](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/String/slice) entre le nombre de caractères de la chaine divisé par 3 et un `res_length`. En testant plusieurs valeurs de longueur de message pour `res_length` on s'aperçoit qu'elle renvoit toujours un nombre négatif. La fonction retourne donc une sous-chaine vide.

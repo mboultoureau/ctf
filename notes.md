@@ -8,7 +8,8 @@ Ce sont des notes aléatoires de mes différents CTF et challenges effectués.
     -   [Conversion de bases](#conversion-de-bases)
 -   [Cryptographie](#cryptographie)
     -   [Brainfuck](#brainfuck)
-    -   [Bibliothèque de Babel](#bibliothèque-de-Babel)
+    -   [Bibliothèque de Babel](#bibliothèque-de-babel)
+    -   [AES Encryption](#aes-encryption)
 -   [Réseau](#réseau)
     -   [Analyseur réseau : WireShark](#analyseur-réseau--wireshark)
 -   [Reverse Engineering](#reverse-engineering)
@@ -49,6 +50,12 @@ La bibliothèque de Babel est une nouvelle décrit une bibliothèque de taille g
 
 [Visualiseur](http://libraryofbabel.info/browse.cgi)
 [Wikipedia](https://fr.wikipedia.org/wiki/La_Biblioth%C3%A8que_de_Babel)
+
+### AES Encryption
+Advanced Encryption Standard ou AES (litt. « norme de chiffrement avancé »), est un algorithme de chiffrement symétrique.
+
+[Source : Wikipedia](https://fr.wikipedia.org/wiki/Advanced_Encryption_Standard)
+[Décryptage avec Crypto.Cipher (Python)](https://pycryptodome.readthedocs.io/en/latest/src/cipher/cipher.html)
 
 ## Réseau
 
