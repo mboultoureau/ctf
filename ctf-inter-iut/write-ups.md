@@ -4,7 +4,11 @@ Les différents Write-Ups du [CTF Inter IUT](https://twitter.com/CTF_Inter_IUT).
 
 ## Sommaire
 - [Bibliothèque de Babel](#bibliothèque-de-babel)
-
+- [Brainfuck](#brainfuck)
+- [Capture Wireshark](#capture-wireshark)
+- [Magic code](#magic-code)
+- [AES Ciphertext](#aes-ciphertext)
+- [Offuscation JavaScript](#offuscation-javascript)
 
 ## Bibliothèque de Babel
 
