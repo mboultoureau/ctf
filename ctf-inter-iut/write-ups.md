@@ -13,6 +13,7 @@ Les différents Write-Ups du [CTF Inter IUT](https://twitter.com/CTF_Inter_IUT).
 -   [Buffer Overflow](#buffer-overflow)
 -   [Exiftool](#exiftool)
 -   [Capture Wireshark 2](#capture-wireshark-2)
+-   [USB Dump](#usb-dump)
 
 ## Bibliothèque de Babel
 
@@ -222,3 +223,13 @@ En ouvrant la capture dans Wireshark, on remarque un téléchargement d'image. P
 Flag : `ENSIBS{hTTps_1s_0verr4t3d}`
 
 Note : Nous pouvons aussi tout simplement observer la requête HTTP faites directement sur Wireshark et regarder le contenu.
+
+## USB Dump
+
+Le [tweet original](https://twitter.com/CTF_Inter_IUT/status/1270732473065000962) nous donne un dump d'une clé USB. La première solution serait de la monter sur Linux. Une autre solution est de chercher "ENSIBS" dans le dump.
+
+```sh
+strings usb.dump | grep "ENSIBS"
+```
+
+Flag : `ENSIBS{p4s_tr3s_s3cr37_t4_cl3_USB}`
