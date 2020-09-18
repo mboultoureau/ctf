@@ -14,6 +14,7 @@ Les différents Write-Ups du [CTF Inter IUT](https://twitter.com/CTF_Inter_IUT).
 -   [Exiftool](#exiftool)
 -   [Capture Wireshark 2](#capture-wireshark-2)
 -   [USB Dump](#usb-dump)
+-   [Password Recovery](#password-recovery)
 
 ## Bibliothèque de Babel
 
@@ -233,3 +234,15 @@ strings usb.dump | grep "ENSIBS"
 ```
 
 Flag : `ENSIBS{p4s_tr3s_s3cr37_t4_cl3_USB}`
+
+## Password Recovery
+
+Le [tweet original](https://twitter.com/CTF_Inter_IUT/status/1273269315731685377) nous donne un hash de mot de passe : `$1$jqplxfvL$fXNNz7ZWaBdS.njNn3Ke2.`.
+
+Grâce à John The Ripper, en plaçant le hash dans un fichier texte, on arrive à retrouver le mot de passe original :
+
+```sh
+./john password.txt
+```
+
+Flag : `hellokitty`
